@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as readline from "readline";
-import {z} from "zod";
+import { z } from "zod";
 
 /**
  * This is a JSDoc comment. Similar to JavaDoc, it documents a public-facing
@@ -15,7 +15,17 @@ import {z} from "zod";
  * @param path The path to the file being loaded.
  * @returns a "promise" to produce a 2-d array of cell values
  */
-export async function parseCSV(path: string): Promise<string[][]> {
+
+
+class ValidationError extends Error {
+  constructor(message: string, public name: string, num: number) {
+    super(message);
+    this.name = "ZodValidationError";
+  }
+}
+
+const studentRowSchema = z.tuple([z.string(), z.coerce.number(), z.email()])
+export async function parseCSV<T>(path: string, callerSchema?: z.ZodType<T> | undefined): Promise<(T | string[])[]> {
   // This initial block of code reads from a file in Node.js. The "rl"
   // value can be iterated over in a "for" loop. 
   const fileStream = fs.createReadStream(path);
@@ -23,16 +33,31 @@ export async function parseCSV(path: string): Promise<string[][]> {
     input: fileStream,
     crlfDelay: Infinity, // handle different line endings
   });
-  
+  let result = [];
   // Create an empty array to hold the results
-  let result = []
-  
-  // We add the "await" here because file I/O is asynchronous. 
-  // We need to force TypeScript to _wait_ for a row before moving on. 
-  // More on this in class soon!
-  for await (const line of rl) {
-    const values = line.split(",").map((v) => v.trim());
-    result.push(values)
+  if (callerSchema == undefined) {
+    // We add the "await" here because file I/O is asynchronous. 
+    for await (const line of rl) {
+      const values = line.split(",").map((v) => v.trim());
+      result.push(values);
+    }
+  }
+  else {
+    // The first steps are the same as without a schema.
+    let counter = 0;
+    for await (const line of rl) {
+      const values = line.split(",").map((v) => v.trim());
+      try {
+        let validatedValues = callerSchema.parse(values);
+        result.push(validatedValues);
+        counter += 1;
+      } catch (error) {
+        throw new Error('Failed Zod validation on the row number ${counter} in the table')
+      }
+
+
+    }
+
   }
   return result
 }

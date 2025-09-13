@@ -1,4 +1,4 @@
-name, type, invention_year, worst_case_performance
-Kruskal's algorithm, "graph spanning tree", 1956, O(|E|log |V|)
-Boruvka's algorithm, "graph spanning tree", 1926, O(|E|log |V|)
-A*, "informed search", 1968, O(b^d)
+name, type, inventionYear, truthNuke
+Kruskal's algorithm, "graph spanning tree", 1956, true
+Boruvka's algorithm, "graph spanning tree", 1926, false
+A*, "informed search", 1968, true
