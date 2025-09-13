@@ -65,7 +65,7 @@ test("parceCSV will always return correct length", async () => {
 
 
 /*test("parseCSV returns correct types: number", async () => {
-  const results = await parseCSV(ALGORITHMS_CSV_PATH)
+  const results: string[] = await parseCSV(ALGORITHMS_CSV_PATH)
   expect(results[1][2] + 3).toEqual(1959);
   expect(results[2][2] + 100).toEqual(2026);
 });*/
