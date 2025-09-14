@@ -35,6 +35,18 @@ There hadn't been too many unique design choices, just a basic parser though Zod
 
 ### 1340 Supplement
 
+In my supplemental task, I tried to implement a few structures. First, I did two ways of 
+implementing linked list: one easier, but very unreliable; the other required recursive type declaration but it ended up describing the list structure as a schema pretty well.
+
+Next, I slightly expanded on the list's framework, to create a double-linked list. I implied
+that similar structures can be used for creating more complicated linked structures,
+such as graphs.
+
+Finally, I attempted to make a zod schema of endless stream structure, but it turned out to be 
+simpler then I wanted, as I wasn't able to refine the output to be the exact output of the function.
+
+The work lies in supplemental-task.ts, and more detailed descriptions are in the comments.
+
 - #### 1. Correctness
     Parser is usually a utility program, meant for processing large data in format that's uneasy to work with, into a format much more comfortable. So in my opinion, for parser, both concrete, transparent functionality, and flexibility are important. Specifically CSV parser should: 
      - Transform the inputted file based on the schema provided by the user. 
@@ -56,6 +68,7 @@ It was honestly not a very good first experience, but that is almost exclusively
 
 #### Team members and contributions (include cs logins): Yevhen Burkovskyi, yburkovs
 
-#### Collaborators (cslogins of anyone you worked with on this project and/or generative AI): Copilot Ai for task 2, wrote many of the detailed characteristics of potential parser. I also used a lot of internet resources, like Zod documentation and other educational materials on Typescript. I haven't worked with any collaborators in this project.
-#### Total estimated time it took to complete project: 6 hours
+#### Collaborators (cslogins of anyone you worked with on this project and/or generative AI): 
+Copilot Ai for task 2, wrote many of the detailed characteristics of potential parser. I also used a lot of internet resources, mostly typescript documentation and Zod documentation, although some other materials too. I used a lot of documentation because I wanted to understand how it works deeply.
+#### Total estimated time it took to complete project: 11 hours
 #### Link to GitHub Repo: git@github.com:cs0320-f25/typescript-csv-AncientBehemoth-droid.git

@@ -52,7 +52,7 @@ export async function parseCSV<T>(path: string, callerSchema?: z.ZodType<T> | un
         result.push(validatedValues);
         counter += 1;
       } catch (error) {
-        throw new Error('Failed Zod validation on the row number ${counter} in the table')
+        throw new Error(`Failed Zod validation on the row number ${counter} in the table`)
       }
 
 
